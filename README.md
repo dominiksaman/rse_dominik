@@ -1,3 +1,6 @@
+# What's new
+Docker is running fine, had some issues with flowCore (i think it was -- where is really didn't like i was on an amr64 machine when i was in the sesting phase. May get rid of it later to reduce blaot.
+
 # FCS Analysis Pipeline
 
 This repository contains a Snakemake workflow for analyzing FCS files. For each
