@@ -12,9 +12,14 @@ rule all:
 
 rule process_fcs:
     input:
-        os.path.join(RAW_DIR, '{sample}.fcs')
+        fcs = os.path.join(RAW_DIR, "{sample}.fcs")
     output:
-        fcs=os.path.join(PROCESSED_DIR, '{sample}_umap_clust.fcs'),
-        plot=os.path.join(PLOT_DIR, '{sample}.png')
+        fcs  = os.path.join(PROCESSED_DIR, "{sample}_umap_clust.fcs"),
+        plot = os.path.join(PLOT_DIR,       "{sample}.png")
     shell:
-        'Rscript {workflow.basedir}/scripts/process_fcs.R -i {input} -o {output.fcs} -p {output.plot}'
+        (
+            'Rscript "{workflow.basedir}/scripts/process_fcs.R" '
+            '-i "{input.fcs}" '
+            '-o "{output.fcs}" '
+            '-p "{output.plot}"'
+        )
