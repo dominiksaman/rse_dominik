@@ -1,0 +1,8 @@
+# ignore Snakemake caches
+.snakemake/
+
+# ignore processed FCS outputs
+data/processed/
+
+# ignore plot PNGs
+plots/
