@@ -1,72 +1,44 @@
-# What's new
-Docker is running fine, had some issues with flowCore (i think it was -- where is really didn't like i was on an amr64 machine when i was in the testing phase. May get rid of it later to reduce blaot.
+# FCS CyTOF Pipeline
 
-# FCS Analysis Pipeline
+## Overview
 
-This repository contains a Snakemake workflow for analyzing FCS files. For each
-input file the pipeline performs the following steps:
+- **Purpose:** Fast, reproducible UMAP+KMeans clustering and plotting for FCS files (e.g. CyTOF).
+- **Features:** 
+  - Channel selection via `channels.txt` (optional).
+  - Dockerised: runs identically anywhere.
+  - Snakemake-powered for parallel sample processing.
 
-1. Selects channels with a non-empty description excluding scatter channels.
-2. Applies an `asinh` transformation with cofactor 5.
-3. Computes a 2D UMAP embedding.
-4. Performs k-means clustering (5 clusters).
-5. Writes a new FCS file containing UMAP coordinates and cluster labels.
-6. Generates a UMAP plot coloured by cluster.
+## Usage
 
-The pipeline relies on the `flowCore` R package for parsing FCS files.
-
-# Your task:
-1) Make it work (build&run)
-2) Add the possibility to input channels.txt and use only channels with 1 in the last column of channels.txt
-3) It is not necessary to fix this repo (it is doable but might be tedious), feel free to implement the pipeline in 
-the language of your choice.
-4) The only conditions are: a) it must do what is described above, b) It must be runnable in docker container built
-as part of the install process, c) the dependencies must transparently controled (e.g. via conda environment 
-yaml) and d) must run under pipelining sw (e.g. snakemake) which takes care of paralelisation and avoids 
-recalculations of already processed files.
-5) The result must be well documented
-
-
-## Installation
-
-Create a conda environment and install the dependencies:
+### 1. **Install via Docker** (recommended)
 
 ```bash
+git clone https://github.com/<yourusername>/rse_docker.git
+cd rse_docker
+docker build -t fcs_pipeline .
+# Run pipeline (mount local dir as /pipeline)
+docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
+
+### 2. **Manual conda installation**
+
 conda env create -f environment.yml
 conda activate fcs_pipeline
-```
-
-## Running the pipeline
-
-Place your FCS files into `data/raw` and run:
-
-```bash
 snakemake --cores 4
-```
 
-Outputs will be written to `data/processed` and `plots`.
+### 3.  **Input and Output**
 
-## Docker
+> Put your .fcs files in data/raw/
+> Output FCS with UMAP+Cluster columns: data/processed/
+> Output plots: plots/
 
-Build a Docker image containing all dependencies:
+### 4. **Optional: Custom Channel Selection**
+> Place a channels.txt in repo root. It must be a tab-separated file, with columns:
+name    desc    range    minRange    maxRange    use
+> Channels with use==1 are included in the analysis.
+> If omitted, fallback is all non-scatter, non-NA channel
 
-```bash
-docker build -t fcs_pipeline .
-```
+### 5. **Optional: if you want to run individual processing scripts**
+Rscript scripts/process_fcs.R -i <input.fcs> -o <output.fcs> -p <plot.png> [-c channels.txt]
 
-Run the pipeline using the image:
 
-```bash
-docker run --rm -v $(pwd):/data -w /pipeline fcs_pipeline snakemake --cores 4
-```
 
-## Tests
-
-Unit tests can be executed with `pytest`:
-
-```bash
-pytest
-```
-
-The tests use an example FCS file distributed with `flowCore` and verify that
-the pipeline completes and creates the expected outputs.
