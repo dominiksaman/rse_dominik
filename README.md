@@ -22,6 +22,18 @@ docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
 
 ### 2. **Manual conda installation**
 
+# Clone the repository (if not already)
+```
+git clone https://github.com/dominiksaman/rse_docker.git
+cd rse_docker
+```
+
+# OR, if you already have a local copy:
+```
+git pull origin main  # or whatever branch is latest
+```
+
+# Set up conda environment and run
 ```
 conda env create -f environment.yml
 conda activate fcs_pipeline
