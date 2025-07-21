@@ -36,14 +36,14 @@ docker run --rm -v $(pwd):/pipeline -w /pipeline dominiksaman/fcs_pipeline:lates
 
 ### 2. **Manual conda installation**
 
-# Clone the repository (if not already)
+### Clone the repository (if not already)
 ```
 git clone --branch final https://github.com/dominiksaman/rse_dominik.git
 cd rse_dominik
 ```
 
 
-# Set up conda environment and run
+### Set up conda environment and run
 ```
 conda env create -f environment.yml
 conda activate fcs_pipeline
