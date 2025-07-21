@@ -12,23 +12,23 @@
 
 ## 1. Run via Docker (recommended, fastest)
 
-# Get code and test data:
+### Get code and test data:
 ```
 git clone --branch final https://github.com/dominiksaman/rse_dominik.git
 cd rse_dominik
 ```
 
-# (Option 1, preferred) Pull pre-built image:
+### (Option 1, preferred) Pull pre-built image:
 ```
 docker pull dominiksaman/fcs_pipeline:latest
 ```
 
-# Run the pipeline
+### Run the pipeline
 ```
 docker run --rm -v $(pwd):/pipeline -w /pipeline dominiksaman/fcs_pipeline:latest --cores 4
 ```
 
-# (Option 2, if you want to build yourself)
+### (Option 2, if you want to build yourself)
 ```
 # docker build -t fcs_pipeline .
 # docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4m -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
