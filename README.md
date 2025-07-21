@@ -30,8 +30,8 @@ docker run --rm -v $(pwd):/pipeline -w /pipeline dominiksaman/fcs_pipeline:lates
 
 ### (Option 2, if you want to build yourself)
 ```
-# docker build -t fcs_pipeline .
-# docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4m -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
+docker build -t fcs_pipeline .
+docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4m -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
 ```
 
 ### 2. **Manual conda installation**
