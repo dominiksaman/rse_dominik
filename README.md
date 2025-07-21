@@ -18,12 +18,15 @@ cd rse_docker
 docker build -t fcs_pipeline .
 # Run pipeline (mount local dir as /pipeline)
 docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
+```
 
 ### 2. **Manual conda installation**
 
+```
 conda env create -f environment.yml
 conda activate fcs_pipeline
 snakemake --cores 4
+```
 
 ### 3.  **Input and Output**
 
@@ -38,7 +41,9 @@ name    desc    range    minRange    maxRange    use
 > If omitted, fallback is all non-scatter, non-NA channel
 
 ### 5. **Optional: if you want to run individual processing scripts**
+```
 Rscript scripts/process_fcs.R -i <input.fcs> -o <output.fcs> -p <plot.png> [-c channels.txt]
+```
 
 
 
