@@ -13,8 +13,8 @@
 ### 1. **Install via Docker** (recommended)
 
 ```bash
-git clone https://github.com/<yourusername>/rse_docker.git
-cd rse_docker
+git clone --branch final https://github.com/dominiksaman/rse_dominik.git
+cd rse_dominik
 docker build -t fcs_pipeline .
 # Run pipeline (mount local dir as /pipeline)
 docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
