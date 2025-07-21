@@ -24,14 +24,10 @@ docker run --rm -v $(pwd):/pipeline -w /pipeline fcs_pipeline --cores 4
 
 # Clone the repository (if not already)
 ```
-git clone https://github.com/dominiksaman/rse_docker.git
-cd rse_docker
+git clone --branch final https://github.com/dominiksaman/rse_dominik.git
+cd rse_dominik
 ```
 
-# OR, if you already have a local copy:
-```
-git pull origin main  # or whatever branch is latest
-```
 
 # Set up conda environment and run
 ```
